@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Plan de Estudio Associate Cloud Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #0079C2;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #FFC72C;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-left {
+            left: 0;
+        }
+        .timeline-right {
+            left: 50%;
+        }
+        .timeline-right::after {
+            left: -16px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            .timeline-left::after, .timeline-right::after {
+                left: 15px;
+            }
+            .timeline-right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#004AAD]">Tu Ruta a la Certificación</h1>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#0079C2] mt-2">Associate Cloud Engineer en 3 Semanas</h2>
+            <p class="text-gray-600 mt-4 max-w-3xl mx-auto">Una guía visual e interactiva basada en tu plan de estudio para conquistar el examen de Google Cloud.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="overview" class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#00AEEF]">
+                    <p class="text-5xl font-black text-[#004AAD]">3</p>
+                    <p class="text-xl font-semibold text-gray-700 mt-2">Semanas</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#00AEEF]">
+                    <p class="text-5xl font-black text-[#004AAD]">5</p>
+                    <p class="text-xl font-semibold text-gray-700 mt-2">Módulos Clave</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#00AEEF]">
+                    <p class="text-2xl font-black text-[#004AAD]">9 SEP 2025</p>
+                    <p class="text-xl font-semibold text-gray-700 mt-2">Fecha de Inicio</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#00AEEF]">
+                    <p class="text-2xl font-black text-[#004AAD]">29 SEP 2025</p>
+                    <p class="text-xl font-semibold text-gray-700 mt-2">Meta Final</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="exam-breakdown" class="mb-16">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow-xl">
+                <h3 class="text-2xl font-bold text-center text-[#004AAD] mb-2">Distribución de Temas del Examen</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Comprender el peso de cada sección es crucial. El examen se enfoca principalmente en la implementación y operación de soluciones.</p>
+                <div class="chart-container">
+                    <canvas id="examDonutChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section id="timeline-section" class="mb-16">
+            <h3 class="text-3xl font-bold text-center text-[#004AAD] mb-12">Cronograma Detallado</h3>
+            <div class="timeline">
+                <div class="timeline-container timeline-left">
+                    <div class="timeline-content">
+                        <h2 class="text-xl font-bold text-[#0079C2]">Semana 1: Fundamentos y Despliegue</h2>
+                        <p class="text-sm text-gray-500 mb-4">9 - 15 de Septiembre</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><span class="font-semibold">Sección 1 (20%):</span> Configurar entorno, IAM y facturación.</li>
+                            <li><span class="font-semibold">Sección 2 (17.5%):</span> Planificar cómputo, almacenamiento y redes.</li>
+                            <li><span class="font-semibold">Sección 3 (25%):</span> Implementar en Compute Engine, GKE y Cloud Run.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-container timeline-right">
+                    <div class="timeline-content">
+                        <h2 class="text-xl font-bold text-[#0079C2]">Semana 2: Operación y Seguridad</h2>
+                        <p class="text-sm text-gray-500 mb-4">16 - 22 de Septiembre</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li><span class="font-semibold">Sección 4 (20%):</span> Administrar recursos, monitoreo y logging.</li>
+                            <li><span class="font-semibold">Sección 5 (17.5%):</span> Profundizar en IAM y cuentas de servicio.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-container timeline-left">
+                    <div class="timeline-content">
+                        <h2 class="text-xl font-bold text-[#0079C2]">Semana 3: Repaso y Práctica Intensiva</h2>
+                        <p class="text-sm text-gray-500 mb-4">23 - 29 de Septiembre</p>
+                        <p class="text-gray-700">Esta semana es para consolidar todo tu conocimiento. Realiza exámenes de práctica, identifica tus áreas débiles y repasa los conceptos clave hasta sentirte con total confianza.</p>
+                        <div class="mt-4 flex items-center justify-center space-x-4 text-2xl">
+                            <span title="Repaso General">🔄</span>
+                            <span class="text-gray-300">&rarr;</span>
+                            <span title="Exámenes de Práctica">📝</span>
+                            <span class="text-gray-300">&rarr;</span>
+                            <span title="Analizar Resultados">📊</span>
+                            <span class="text-gray-300">&rarr;</span>
+                            <span title="¡Éxito!">🏆</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="study-focus" class="mb-16">
+             <div class="bg-white p-6 md:p-8 rounded-lg shadow-xl">
+                <h3 class="text-2xl font-bold text-center text-[#004AAD] mb-2">Enfoque de Estudio por Días</h3>
+                <p class="text-center text-gray-600 mb-6 max-w-2xl mx-auto">Visualiza la dedicación recomendada para cada módulo durante las primeras dos semanas de estudio activo.</p>
+                <div class="chart-container" style="max-width: 800px; height: 450px;">
+                    <canvas id="studyDaysBarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#004AAD] text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h3 class="text-2xl font-bold">Consejos para el Éxito</h3>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-4 bg-[#0079C2] rounded-lg">
+                    <p class="text-5xl">⏰</p>
+                    <p class="mt-2 font-semibold">Consistencia</p>
+                    <p class="text-sm opacity-90">Dedica al menos 2 horas diarias.</p>
+                </div>
+                <div class="p-4 bg-[#0079C2] rounded-lg">
+                    <p class="text-5xl">💻</p>
+                    <p class="mt-2 font-semibold">Práctica Real</p>
+                    <p class="text-sm opacity-90">Usa los laboratorios para afianzar la teoría.</p>
+                </div>
+                <div class="p-4 bg-[#0079C2] rounded-lg">
+                    <p class="text-5xl">💡</p>
+                    <p class="mt-2 font-semibold">Comprensión</p>
+                    <p class="text-sm opacity-90">No memorices, entiende los conceptos.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapText(label) {
+            const max_width = 16;
+            if (label.length <= max_width) {
+                return label;
+            }
+            const words = label.split(' ');
+            let current_line = '';
+            const lines = [];
+            for (const word of words) {
+                if ((current_line + ' ' + word).trim().length > max_width) {
+                    lines.push(current_line.trim());
+                    current_line = word;
+                } else {
+                    current_line = (current_line + ' ' + word).trim();
+                }
+            }
+            if (current_line) {
+                lines.push(current_line.trim());
+            }
+            return lines;
+        }
+
+        const commonTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const donutCtx = document.getElementById('examDonutChart').getContext('2d');
+        const examDonutChart = new Chart(donutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Sección 1: Configuración', 'Sección 2: Planificación', 'Sección 3: Implementación', 'Sección 4: Operación', 'Sección 5: Seguridad'],
+                datasets: [{
+                    label: 'Peso en el Examen',
+                    data: [20, 17.5, 25, 20, 17.5],
+                    backgroundColor: [
+                        '#004AAD',
+                        '#0079C2',
+                        '#00AEEF',
+                        '#8ED5F8',
+                        '#FFC72C'
+                    ],
+                    borderColor: '#f0f4f8',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...commonTooltipOptions.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 12
+                            },
+                            padding: 20
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        const barCtx = document.getElementById('studyDaysBarChart').getContext('2d');
+        const originalLabels = ['Sección 1: Configuración de Entorno', 'Sección 2: Planificación y Configuración', 'Sección 3: Implementación de Solución', 'Sección 4: Asegurar Operación Exitosa', 'Sección 5: Configuración de Acceso y Seguridad'];
+        const wrappedLabels = originalLabels.map(label => wrapText(label));
+
+        const studyDaysBarChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedLabels,
+                datasets: [{
+                    label: 'Días de Estudio Recomendados',
+                    data: [2, 2, 3, 4, 3],
+                    backgroundColor: [
+                        '#004AAD',
+                        '#0079C2',
+                        '#00AEEF',
+                        '#8ED5F8',
+                        '#FFC72C'
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...commonTooltipOptions.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            stepSize: 1
+                        }
+                    },
+                    y: {
+                         grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
