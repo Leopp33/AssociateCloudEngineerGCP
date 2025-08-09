@@ -11,7 +11,7 @@ Objetivo: Completar los 5 módulos del examen de certificación
 📘 Cronograma detallado  
 | Fecha | Día | Módulo | Tema principal |  
 | ✅ 09/09/2025 | Lunes | Módulo 1 | Jerarquía de recursos, IAM, Cloud Identity |  
-| ✅ 10/09/2025 | Martes | Módulo 1 | APIs, cuotas, observabilidad, facturación | 
+| ✅ 10/09/2025 | Martes | Módulo 1 | APIs, cuotas, observabilidad, facturación |  
 | ✅ 11/09/2025 | Miércoles | Módulo 2 | Compute: VM, GKE, Cloud Run, Cloud Functions |  
 | ✅ 12/09/2025 | Jueves | Módulo 2 | Almacenamiento: Cloud SQL, BigQuery, Firestore, Spanner |  
 | ✅ 13/09/2025 | Viernes | Módulo 2 | Redes: balanceo, ubicaciones, niveles de servicio |  
